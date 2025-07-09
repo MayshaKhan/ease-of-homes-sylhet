@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Bed, Bath, Square } from "lucide-react";
@@ -8,12 +7,12 @@ const FeaturedListings = () => {
     {
       id: 1,
       title: "Modern Duplex House",
-      location: "Sylhet, Zindabazar",
+      location: "Sylhet, Zindabazar", 
       price: "$125,000",
       beds: 4,
       baths: 3,
       sqft: "2,400",
-      image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
       type: "Buy"
     },
     {
