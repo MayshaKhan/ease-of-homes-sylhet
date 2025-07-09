@@ -8,7 +8,7 @@ const HeroSection = () => {
       {/* Background with overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/60">
         <img
-          src="/lovable-uploads/4a72420a-f4ff-448e-921c-5996d294733f.png"
+          src="/lovable-uploads/d191584e-0741-4edb-8fda-3ad629483420.png"
           alt="Beautiful homes"
           className="w-full h-full object-cover"
         />
