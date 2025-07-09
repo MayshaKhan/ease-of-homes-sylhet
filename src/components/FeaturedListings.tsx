@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Bed, Bath, Square } from "lucide-react";
@@ -117,7 +118,7 @@ const FeaturedListings = () => {
 
         <div className="text-center">
           <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg">
-            🏡 View All Listings
+            View All Listings
           </Button>
         </div>
       </div>

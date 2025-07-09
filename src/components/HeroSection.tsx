@@ -30,10 +30,10 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in">
           <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg transition-all hover:scale-105">
-            🔍 Browse Listings
+            Browse Listings
           </Button>
           <Button variant="outline" className="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-8 py-3 text-lg rounded-lg transition-all hover:scale-105">
-            📝 List Your Property
+            List Your Property
           </Button>
         </div>
 
