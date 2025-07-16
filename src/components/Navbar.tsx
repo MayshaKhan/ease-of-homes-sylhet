@@ -1,6 +1,12 @@
 
-import { Building2, Menu, X } from "lucide-react";
+import { Building2, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,7 +15,6 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/", active: true },
-    { name: "Listings", href: "/listings" },
     { name: "Blogs", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact Us", href: "/contact" }
@@ -27,7 +32,42 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navItems.slice(0, 1).map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-sm font-medium transition-colors hover:text-orange-500 text-gray-700"
+              >
+                {item.name}
+              </Link>
+            ))}
+            
+            {/* Listings Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-sm font-medium transition-colors hover:text-orange-500 text-gray-700">
+                Listings
+                <ChevronDown className="h-4 w-4 ml-1" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link to="/buy" className="w-full">
+                    Buy
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/rent" className="w-full">
+                    Rent
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/sell" className="w-full">
+                    Sell
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {navItems.slice(1).map((item) => (
               item.href.startsWith('/') ? (
                 <Link
                   key={item.name}
@@ -70,7 +110,44 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              {navItems.map((item) => (
+              {navItems.slice(0, 1).map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="block px-3 py-2 text-base font-medium transition-colors hover:text-orange-500 text-gray-700"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              
+              {/* Mobile Listings Submenu */}
+              <div className="space-y-1">
+                <div className="px-3 py-2 text-base font-medium text-gray-700">Listings</div>
+                <Link
+                  to="/buy"
+                  className="block px-6 py-2 text-base font-medium transition-colors hover:text-orange-500 text-gray-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Buy
+                </Link>
+                <Link
+                  to="/rent"
+                  className="block px-6 py-2 text-base font-medium transition-colors hover:text-orange-500 text-gray-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Rent
+                </Link>
+                <Link
+                  to="/sell"
+                  className="block px-6 py-2 text-base font-medium transition-colors hover:text-orange-500 text-gray-600"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sell
+                </Link>
+              </div>
+
+              {navItems.slice(1).map((item) => (
                 item.href.startsWith('/') ? (
                   <Link
                     key={item.name}
