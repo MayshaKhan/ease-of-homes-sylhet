@@ -1,8 +1,24 @@
 
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const [filters, setFilters] = useState({
+    location: "",
+    propertyType: "",
+    priceRange: ""
+  });
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (filters.location) params.set("city", filters.location.toLowerCase());
+    if (filters.propertyType) params.set("propertyType", filters.propertyType);
+    if (filters.priceRange) params.set("budget", filters.priceRange);
+    navigate(`/buy?${params.toString()}`);
+  };
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background with overlay */}
@@ -42,35 +58,52 @@ const HeroSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-600">Location</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                <option>Sylhet</option>
-                <option>Dhaka</option>
-                <option>Chittagong</option>
+              <select 
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                value={filters.location}
+                onChange={(e) => setFilters(prev => ({ ...prev, location: e.target.value }))}
+              >
+                <option value="">Select Location</option>
+                <option value="dhaka">Dhaka</option>
+                <option value="sylhet">Sylhet</option>
+                <option value="chattogram">Chattogram</option>
               </select>
             </div>
             
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-600">Property Type</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                <option>Duplex house</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>Office</option>
+              <select 
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                value={filters.propertyType}
+                onChange={(e) => setFilters(prev => ({ ...prev, propertyType: e.target.value }))}
+              >
+                <option value="">Select Type</option>
+                <option value="apartment">Apartment</option>
+                <option value="house">House</option>
+                <option value="villa">Villa</option>
+                <option value="studio">Studio</option>
               </select>
             </div>
             
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-600">Price Range</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
-                <option>$100000 - 180000</option>
-                <option>$50000 - 100000</option>
-                <option>$180000 - 300000</option>
-                <option>$300000+</option>
+              <select 
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                value={filters.priceRange}
+                onChange={(e) => setFilters(prev => ({ ...prev, priceRange: e.target.value }))}
+              >
+                <option value="">Select Range</option>
+                <option value="0-100k">$0 - $100k</option>
+                <option value="100k-200k">$100k - $200k</option>
+                <option value="200k+">$200k+</option>
               </select>
             </div>
             
             <div className="flex items-end">
-              <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white p-3 rounded-lg flex items-center justify-center">
+              <Button 
+                onClick={handleSearch}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white p-3 rounded-lg flex items-center justify-center"
+              >
                 <Search className="h-5 w-5" />
               </Button>
             </div>

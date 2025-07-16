@@ -18,6 +18,22 @@ export interface Listing {
 export const allListings: Listing[] = [
   {
     id: 1,
+    title: "Family Villa for Sale",
+    location: "Dhaka, Gulshan",
+    city: "dhaka",
+    price: 150000,
+    priceDisplay: "$150,000",
+    beds: 4,
+    baths: 3,
+    sqft: "2,500",
+    image: "/lovable-uploads/d191584e-0741-4edb-8fda-3ad629483420.png",
+    type: "Buy",
+    propertyType: "villa",
+    amenities: ["parking", "garden"],
+    nearbySchools: true
+  },
+  {
+    id: 2,
     title: "Modern Duplex House",
     location: "Sylhet, Zindabazar",
     city: "sylhet",
@@ -33,7 +49,7 @@ export const allListings: Listing[] = [
     nearbySchools: true
   },
   {
-    id: 2,
+    id: 3,
     title: "Luxury Apartment",
     location: "Sylhet, Amberkhana",
     city: "sylhet",

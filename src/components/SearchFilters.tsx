@@ -62,8 +62,8 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
       ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg border">
-      <div className="flex items-center gap-2 mb-4">
+    <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-6xl mx-auto">
+      <div className="flex items-center gap-2 mb-6">
         <Search className="h-5 w-5 text-orange-500" />
         <h3 className="text-lg font-semibold text-gray-900">Search Filters</h3>
       </div>
@@ -76,10 +76,10 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
             City
           </label>
           <Select value={filters.city} onValueChange={(value) => updateFilter("city", value)}>
-            <SelectTrigger>
+            <SelectTrigger className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <SelectValue placeholder="Select city" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg">
               <SelectItem value="dhaka">Dhaka</SelectItem>
               <SelectItem value="sylhet">Sylhet</SelectItem>
               <SelectItem value="chattogram">Chattogram</SelectItem>
@@ -95,10 +95,10 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
             Budget
           </label>
           <Select value={filters.budget} onValueChange={(value) => updateFilter("budget", value)}>
-            <SelectTrigger>
+            <SelectTrigger className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <SelectValue placeholder="Select budget" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg">
               {budgetOptions.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -115,10 +115,10 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
             Property Type
           </label>
           <Select value={filters.propertyType} onValueChange={(value) => updateFilter("propertyType", value)}>
-            <SelectTrigger>
+            <SelectTrigger className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <SelectValue placeholder="Property type" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg">
               <SelectItem value="apartment">Apartment</SelectItem>
               <SelectItem value="house">House</SelectItem>
               <SelectItem value="villa">Villa</SelectItem>
@@ -135,10 +135,10 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
             Bedrooms
           </label>
           <Select value={filters.bedrooms} onValueChange={(value) => updateFilter("bedrooms", value)}>
-            <SelectTrigger>
+            <SelectTrigger className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <SelectValue placeholder="Min bedrooms" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg">
               <SelectItem value="1">1+ Bed</SelectItem>
               <SelectItem value="2">2+ Beds</SelectItem>
               <SelectItem value="3">3+ Beds</SelectItem>
@@ -155,10 +155,10 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
             Amenities
           </label>
           <Select value={filters.amenities} onValueChange={(value) => updateFilter("amenities", value)}>
-            <SelectTrigger>
+            <SelectTrigger className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <SelectValue placeholder="Select amenity" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg">
               <SelectItem value="parking">Parking</SelectItem>
               <SelectItem value="gym">Gym</SelectItem>
               <SelectItem value="pool">Pool</SelectItem>
@@ -180,10 +180,10 @@ const SearchFilters = ({ onFiltersChange, type }: SearchFiltersProps) => {
             value={filters.nearbySchools ? "yes" : ""} 
             onValueChange={(value) => updateFilter("nearbySchools", value === "yes")}
           >
-            <SelectTrigger>
+            <SelectTrigger className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
               <SelectValue placeholder="Any" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg">
               <SelectItem value="yes">Yes</SelectItem>
             </SelectContent>
           </Select>

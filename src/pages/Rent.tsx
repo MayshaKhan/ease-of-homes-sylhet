@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,9 +10,22 @@ import SearchFilters from "@/components/SearchFilters";
 import { getRentListings, filterListings, type Listing } from "@/data/listings";
 
 const Rent = () => {
+  const [searchParams] = useSearchParams();
   const [sortBy, setSortBy] = useState("price");
   const [listings, setListings] = useState<Listing[]>(getRentListings());
   const allRentListings = getRentListings();
+
+  useEffect(() => {
+    // Apply URL filters on page load
+    const urlFilters: any = {};
+    if (searchParams.get("city")) urlFilters.city = searchParams.get("city");
+    if (searchParams.get("propertyType")) urlFilters.propertyType = searchParams.get("propertyType");
+    if (searchParams.get("budget")) urlFilters.budget = searchParams.get("budget");
+    
+    if (Object.keys(urlFilters).length > 0) {
+      handleFiltersChange(urlFilters);
+    }
+  }, [searchParams]);
 
   const handleFiltersChange = (filters: any) => {
     const filtered = filterListings(allRentListings, filters);
