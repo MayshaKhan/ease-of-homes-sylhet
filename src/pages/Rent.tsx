@@ -2,59 +2,56 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Bed, Bath, Square, Filter } from "lucide-react";
+import { MapPin, Bed, Bath, Square } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SearchFilters from "@/components/SearchFilters";
+import { getRentListings, filterListings, type Listing } from "@/data/listings";
 
 const Rent = () => {
   const [sortBy, setSortBy] = useState("price");
+  const [listings, setListings] = useState<Listing[]>(getRentListings());
+  const allRentListings = getRentListings();
 
-  const listings = [
-    {
-      id: 2,
-      title: "Luxury Apartment",
-      location: "Sylhet, Amberkhana",
-      price: "$850/month",
-      beds: 3,
-      baths: 2,
-      sqft: "1,800",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-      type: "Rent"
-    },
-    {
-      id: 4,
-      title: "Cozy Studio",
-      location: "Sylhet, Bondor Bazar",
-      price: "$450/month",
-      beds: 1,
-      baths: 1,
-      sqft: "650",
-      image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
-      type: "Rent"
-    },
-    {
-      id: 7,
-      title: "Student Housing",
-      location: "Chattogram, University Area",
-      price: "$300/month",
-      beds: 2,
-      baths: 1,
-      sqft: "900",
-      image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=600&fit=crop",
-      type: "Rent"
-    },
-    {
-      id: 8,
-      title: "Short-term Apartment",
-      location: "Dhaka, Dhanmondi",
-      price: "$1,200/month",
-      beds: 2,
-      baths: 2,
-      sqft: "1,200",
-      image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-      type: "Rent"
-    }
-  ];
+  const handleFiltersChange = (filters: any) => {
+    const filtered = filterListings(allRentListings, filters);
+    setFilteredListings(filtered);
+  };
+
+  const setFilteredListings = (filtered: Listing[]) => {
+    // Apply sorting
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case "price":
+          return a.price - b.price;
+        case "date":
+          return b.id - a.id; // Assuming higher ID means newer
+        case "popularity":
+          return b.beds - a.beds; // Using beds as popularity metric
+        default:
+          return 0;
+      }
+    });
+    setListings(sorted);
+  };
+
+  // Re-sort when sort option changes
+  const handleSortChange = (newSort: string) => {
+    setSortBy(newSort);
+    const sorted = [...listings].sort((a, b) => {
+      switch (newSort) {
+        case "price":
+          return a.price - b.price;
+        case "date":
+          return b.id - a.id;
+        case "popularity":
+          return b.beds - a.beds;
+        default:
+          return 0;
+      }
+    });
+    setListings(sorted);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -73,61 +70,10 @@ const Rent = () => {
           </div>
         </div>
 
-        {/* Filter Bar */}
-        <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex flex-wrap gap-4 items-center">
-              <div className="flex items-center gap-2 text-gray-700">
-                <Filter className="h-5 w-5" />
-                <span className="font-medium">Filters:</span>
-              </div>
-              
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="City" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="dhaka">Dhaka</SelectItem>
-                  <SelectItem value="sylhet">Sylhet</SelectItem>
-                  <SelectItem value="chattogram">Chattogram</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Budget" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0-500">$0 - $500/month</SelectItem>
-                  <SelectItem value="500-1000">$500 - $1000/month</SelectItem>
-                  <SelectItem value="1000+">$1000+/month</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Property Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="apartment">Apartment</SelectItem>
-                  <SelectItem value="studio">Studio</SelectItem>
-                  <SelectItem value="house">House</SelectItem>
-                  <SelectItem value="student">Student Housing</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Bedrooms" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1+ Bed</SelectItem>
-                  <SelectItem value="2">2+ Beds</SelectItem>
-                  <SelectItem value="3">3+ Beds</SelectItem>
-                  <SelectItem value="4">4+ Beds</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+        {/* Search Filters */}
+        <div className="bg-gray-50 border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <SearchFilters onFiltersChange={handleFiltersChange} type="Rent" />
           </div>
         </div>
 
@@ -141,7 +87,7 @@ const Rent = () => {
             
             <div className="flex items-center gap-4">
               <span className="text-sm font-medium text-gray-700">Sort by:</span>
-              <Select value={sortBy} onValueChange={setSortBy}>
+              <Select value={sortBy} onValueChange={handleSortChange}>
                 <SelectTrigger className="w-40">
                   <SelectValue />
                 </SelectTrigger>
@@ -197,7 +143,7 @@ const Rent = () => {
                   </div>
                   
                   <div className="font-bold text-xl text-blue-500 mb-3">
-                    {listing.price}
+                    {listing.priceDisplay}
                   </div>
 
                   <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">

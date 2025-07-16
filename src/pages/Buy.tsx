@@ -2,59 +2,56 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Bed, Bath, Square, Filter } from "lucide-react";
+import { MapPin, Bed, Bath, Square } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SearchFilters from "@/components/SearchFilters";
+import { getBuyListings, filterListings, type Listing } from "@/data/listings";
 
 const Buy = () => {
   const [sortBy, setSortBy] = useState("price");
+  const [listings, setListings] = useState<Listing[]>(getBuyListings());
+  const allBuyListings = getBuyListings();
 
-  const listings = [
-    {
-      id: 1,
-      title: "Modern Duplex House",
-      location: "Sylhet, Zindabazar", 
-      price: "$125,000",
-      beds: 4,
-      baths: 3,
-      sqft: "2,400",
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-      type: "Buy"
-    },
-    {
-      id: 3,
-      title: "Family Villa",
-      location: "Sylhet, Shahjalal Upashahar",
-      price: "$180,000",
-      beds: 5,
-      baths: 4,
-      sqft: "3,200",
-      image: "https://images.unsplash.com/photo-1599427303058-835c29da2569?w=800&h=600&fit=crop",
-      type: "Buy"
-    },
-    {
-      id: 5,
-      title: "Premium Apartment",
-      location: "Dhaka, Gulshan",
-      price: "$95,000",
-      beds: 3,
-      baths: 2,
-      sqft: "1,500",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop",
-      type: "Buy"
-    },
-    {
-      id: 6,
-      title: "Commercial Space",
-      location: "Chattogram, Agrabad",
-      price: "$250,000",
-      beds: 0,
-      baths: 2,
-      sqft: "4,000",
-      image: "https://images.unsplash.com/photo-1524230572899-a752b3835840?w=800&h=600&fit=crop",
-      type: "Buy"
-    }
-  ];
+  const handleFiltersChange = (filters: any) => {
+    const filtered = filterListings(allBuyListings, filters);
+    setFilteredListings(filtered);
+  };
+
+  const setFilteredListings = (filtered: Listing[]) => {
+    // Apply sorting
+    const sorted = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case "price":
+          return a.price - b.price;
+        case "date":
+          return b.id - a.id; // Assuming higher ID means newer
+        case "popularity":
+          return b.beds - a.beds; // Using beds as popularity metric
+        default:
+          return 0;
+      }
+    });
+    setListings(sorted);
+  };
+
+  // Re-sort when sort option changes
+  const handleSortChange = (newSort: string) => {
+    setSortBy(newSort);
+    const sorted = [...listings].sort((a, b) => {
+      switch (newSort) {
+        case "price":
+          return a.price - b.price;
+        case "date":
+          return b.id - a.id;
+        case "popularity":
+          return b.beds - a.beds;
+        default:
+          return 0;
+      }
+    });
+    setListings(sorted);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -73,61 +70,10 @@ const Buy = () => {
           </div>
         </div>
 
-        {/* Filter Bar */}
-        <div className="bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex flex-wrap gap-4 items-center">
-              <div className="flex items-center gap-2 text-gray-700">
-                <Filter className="h-5 w-5" />
-                <span className="font-medium">Filters:</span>
-              </div>
-              
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="City" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="dhaka">Dhaka</SelectItem>
-                  <SelectItem value="sylhet">Sylhet</SelectItem>
-                  <SelectItem value="chattogram">Chattogram</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Budget" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0-100k">$0 - $100k</SelectItem>
-                  <SelectItem value="100k-200k">$100k - $200k</SelectItem>
-                  <SelectItem value="200k+">$200k+</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Property Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="apartment">Apartment</SelectItem>
-                  <SelectItem value="house">House</SelectItem>
-                  <SelectItem value="villa">Villa</SelectItem>
-                  <SelectItem value="commercial">Commercial</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Bedrooms" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1">1+ Bed</SelectItem>
-                  <SelectItem value="2">2+ Beds</SelectItem>
-                  <SelectItem value="3">3+ Beds</SelectItem>
-                  <SelectItem value="4">4+ Beds</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+        {/* Search Filters */}
+        <div className="bg-gray-50 border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <SearchFilters onFiltersChange={handleFiltersChange} type="Buy" />
           </div>
         </div>
 
@@ -141,7 +87,7 @@ const Buy = () => {
             
             <div className="flex items-center gap-4">
               <span className="text-sm font-medium text-gray-700">Sort by:</span>
-              <Select value={sortBy} onValueChange={setSortBy}>
+              <Select value={sortBy} onValueChange={handleSortChange}>
                 <SelectTrigger className="w-40">
                   <SelectValue />
                 </SelectTrigger>
@@ -199,7 +145,7 @@ const Buy = () => {
                   </div>
                   
                   <div className="font-bold text-xl text-orange-500 mb-3">
-                    {listing.price}
+                    {listing.priceDisplay}
                   </div>
 
                   <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">

@@ -2,54 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Bed, Bath, Square } from "lucide-react";
+import { allListings } from "@/data/listings";
 
 const FeaturedListings = () => {
-  const listings = [
-    {
-      id: 1,
-      title: "Modern Duplex House",
-      location: "Sylhet, Zindabazar", 
-      price: "$125,000",
-      beds: 4,
-      baths: 3,
-      sqft: "2,400",
-      image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-      type: "Buy"
-    },
-    {
-      id: 2,
-      title: "Luxury Apartment",
-      location: "Sylhet, Amberkhana",
-      price: "$850/month",
-      beds: 3,
-      baths: 2,
-      sqft: "1,800",
-      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-      type: "Rent"
-    },
-    {
-      id: 3,
-      title: "Family Villa",
-      location: "Sylhet, Shahjalal Upashahar",
-      price: "$180,000",
-      beds: 5,
-      baths: 4,
-      sqft: "3,200",
-      image: "https://images.unsplash.com/photo-1599427303058-835c29da2569?w=800&h=600&fit=crop",
-      type: "Buy"
-    },
-    {
-      id: 4,
-      title: "Cozy Studio",
-      location: "Sylhet, Bondor Bazar",
-      price: "$450/month",
-      beds: 1,
-      baths: 1,
-      sqft: "650",
-      image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
-      type: "Rent"
-    }
-  ];
+  // Show first 4 listings as featured
+  const listings = allListings.slice(0, 4);
 
   return (
     <section className="py-20 bg-white">
@@ -108,9 +65,9 @@ const FeaturedListings = () => {
                   </div>
                 </div>
                 
-                <div className="font-bold text-xl text-orange-500">
-                  {listing.price}
-                </div>
+                  <div className="font-bold text-xl text-orange-500">
+                    {listing.priceDisplay}
+                  </div>
               </CardContent>
             </Card>
           ))}
