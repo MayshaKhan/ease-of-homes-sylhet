@@ -48,14 +48,14 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex overflow-hidden">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-lg">
+      <div className="w-64 bg-white shadow-lg fixed h-full flex flex-col">
         <div className="p-6 border-b">
           <h2 className="text-xl font-bold text-gray-900">Dashboard</h2>
         </div>
         
-        <nav className="mt-6">
+        <nav className="mt-6 flex-1 overflow-y-auto">
           {sidebarItems.map((item) => {
             const IconComponent = item.icon;
             return (
@@ -73,7 +73,7 @@ const Dashboard = () => {
           })}
         </nav>
 
-        <div className="absolute bottom-0 w-64 p-6 border-t">
+        <div className="p-6 border-t">
           <button
             onClick={handleLogout}
             className="w-full flex items-center px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded-md transition-colors"
@@ -84,8 +84,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 ml-64 h-screen overflow-y-auto">
+        <div className="p-8">
         {activeTab === "list-property" && (
           <div>
             <h1 className="text-2xl font-bold text-gray-900 mb-6">List New Property</h1>
@@ -369,6 +369,7 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
