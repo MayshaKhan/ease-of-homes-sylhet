@@ -16,6 +16,7 @@ import Sell from "./pages/Sell";
 import Login from "./pages/Login";
 import ListingDetails from "./pages/ListingDetails";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/sell" element={<Sell />} />
           <Route path="/login" element={<Login />} />
           <Route path="/listing/:id" element={<ListingDetails />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Upload, Users, Clock, TrendingUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Sell = () => {
+  const navigate = useNavigate();
+
+  const handleStartListing = () => {
+    navigate("/dashboard");
+  };
+
   const steps = [
     {
       step: 1,
@@ -46,7 +53,11 @@ const Sell = () => {
             <p className="text-xl md:text-2xl mb-8 opacity-90">
               Reach thousands of active buyers and renters in just a few clicks.
             </p>
-            <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg">
+            <Button 
+              size="lg" 
+              className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg"
+              onClick={handleStartListing}
+            >
               📝 Start Listing
             </Button>
           </div>
@@ -169,7 +180,11 @@ const Sell = () => {
             <p className="text-xl mb-8 opacity-90">
               Join thousands of successful property sellers on our platform
             </p>
-            <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg">
+            <Button 
+              size="lg" 
+              className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 text-lg"
+              onClick={handleStartListing}
+            >
               📤 Post Your Property Now
             </Button>
           </div>
