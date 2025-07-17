@@ -75,6 +75,13 @@ const Dashboard = () => {
 
         <div className="p-6 border-t">
           <button
+            onClick={() => navigate("/")}
+            className="w-full flex items-center px-3 py-2 mb-2 text-left text-gray-700 hover:bg-gray-50 rounded-md transition-colors"
+          >
+            <Home className="w-5 h-5 mr-3" />
+            Back to Home
+          </button>
+          <button
             onClick={handleLogout}
             className="w-full flex items-center px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded-md transition-colors"
           >
