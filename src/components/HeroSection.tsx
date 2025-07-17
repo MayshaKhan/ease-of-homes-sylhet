@@ -32,7 +32,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-48">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
           Find Your Next{" "}
           <span className="text-orange-500">Home</span> —
