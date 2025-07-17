@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, User } from "lucide-react";
@@ -84,9 +85,11 @@ const BlogPreview = () => {
         </div>
 
         <div className="text-center">
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg">
-            📚 Visit Blog
-          </Button>
+          <Link to="/blog">
+            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg">
+              📚 Visit Blog
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
