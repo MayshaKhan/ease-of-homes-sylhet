@@ -90,7 +90,10 @@ const Navbar = () => {
 
           {/* Login Button */}
           <div className="hidden md:block">
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg">
+            <Button 
+              onClick={() => window.location.href = '/login'}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
+            >
               Log in
             </Button>
           </div>
@@ -168,7 +171,10 @@ const Navbar = () => {
                   </a>
                 )
               ))}
-              <Button className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white">
+              <Button 
+                onClick={() => window.location.href = '/login'}
+                className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white"
+              >
                 Log in
               </Button>
             </div>

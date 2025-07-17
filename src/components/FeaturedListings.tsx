@@ -74,7 +74,10 @@ const FeaturedListings = () => {
         </div>
 
         <div className="text-center">
-          <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg">
+          <Button 
+            onClick={() => window.location.href = '/buy'}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg"
+          >
             View All Listings
           </Button>
         </div>
