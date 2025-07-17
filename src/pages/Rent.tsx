@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,6 +11,7 @@ import { getRentListings, filterListings, type Listing } from "@/data/listings";
 
 const Rent = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [sortBy, setSortBy] = useState("price");
   const [listings, setListings] = useState<Listing[]>(getRentListings());
   const allRentListings = getRentListings();
@@ -160,8 +161,11 @@ const Rent = () => {
                     {listing.priceDisplay}
                   </div>
 
-                  <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">
-                    Search Rentals
+                  <Button 
+                    className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+                    onClick={() => navigate(`/listing/${listing.id}`)}
+                  >
+                    View Details
                   </Button>
                 </CardContent>
               </Card>

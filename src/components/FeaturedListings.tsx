@@ -24,7 +24,11 @@ const FeaturedListings = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {listings.map((listing) => (
-            <Card key={listing.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <Card 
+              key={listing.id} 
+              className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+              onClick={() => navigate(`/listing/${listing.id}`)}
+            >
               <div className="relative">
                 <img
                   src={listing.image}
