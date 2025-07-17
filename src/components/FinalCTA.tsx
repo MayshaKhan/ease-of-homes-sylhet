@@ -16,7 +16,7 @@ const FinalCTA = () => {
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/login?mode=signup')}
             className="bg-white text-orange-500 hover:bg-gray-100 px-8 py-3 text-lg rounded-lg font-semibold transition-all hover:scale-105"
           >
             Sign Up Free
