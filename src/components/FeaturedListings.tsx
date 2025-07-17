@@ -1,10 +1,12 @@
 
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Bed, Bath, Square } from "lucide-react";
 import { allListings } from "@/data/listings";
 
 const FeaturedListings = () => {
+  const navigate = useNavigate();
   // Show first 4 listings as featured
   const listings = allListings.slice(0, 4);
 
@@ -75,7 +77,7 @@ const FeaturedListings = () => {
 
         <div className="text-center">
           <Button 
-            onClick={() => window.location.href = '/buy'}
+            onClick={() => navigate('/buy')}
             className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg rounded-lg"
           >
             View All Listings

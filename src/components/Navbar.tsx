@@ -8,9 +8,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
@@ -91,7 +93,7 @@ const Navbar = () => {
           {/* Login Button */}
           <div className="hidden md:block">
             <Button 
-              onClick={() => window.location.href = '/login'}
+              onClick={() => navigate('/login')}
               className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg"
             >
               Log in
@@ -172,7 +174,7 @@ const Navbar = () => {
                 )
               ))}
               <Button 
-                onClick={() => window.location.href = '/login'}
+                onClick={() => navigate('/login')}
                 className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white"
               >
                 Log in
